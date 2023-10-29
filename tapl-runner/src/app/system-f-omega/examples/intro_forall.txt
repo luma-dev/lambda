@@ -1,0 +1,3 @@
+let id = \X:: *. \x: X. x;
+let app = \f: forall X:: *. X -> X. \X:: *. \x: X. f[X] x;
+(app id)[Nat] 1

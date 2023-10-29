@@ -1,0 +1,10 @@
+let not = \x: Bool. if x { false } else { true };
+let and = \x: Bool. \y: Bool. if x { y } else { false };
+let or = \x: Bool. \y: Bool. if x { true } else { y };
+let xor = \x: Bool. \y: Bool. if x { not y } else { y };
+let nand = \x: Bool. \y: Bool. not (and x y);
+let nor = \x: Bool. \y: Bool. not (or x y);
+let xnor = \x: Bool. \y: Bool. not (xor x y);
+let impl = \x: Bool. \y: Bool. or (not x) y;
+
+impl false true

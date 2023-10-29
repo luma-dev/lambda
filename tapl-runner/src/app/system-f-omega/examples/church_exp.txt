@@ -1,0 +1,21 @@
+type CNat = forall T:: *. (T -> T) -> T -> T;
+let c_succ = (
+  \n: CNat.
+  \X:: *. \f: X -> X. \x: X.
+  f (n[X] f x)
+);
+let c_0 = \X:: *. \f: X -> X. \x: X. x;
+let c_1 = c_succ c_0;
+let c_2 = c_succ c_1;
+let c_3 = c_succ c_2;
+// n^m
+let exp = (
+  \n: CNat.
+  \m: CNat.
+  \X:: *.
+    m[X -> X] n[X]
+);
+// WARN: Take care not to use huge numbers, as it consumes a lot of memory.
+let c_2_powers_to_3 = exp c_2 c_3;
+// Applies succ 2^3 times to 0
+c_2_powers_to_3[Nat] succ 0

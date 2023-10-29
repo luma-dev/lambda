@@ -1,0 +1,5 @@
+def my_type = all a: Prop. all x: Prf a. a;
+def f = \x: Prf my_type. x;
+def g = \a: Prop. \x: Prf a. x;
+
+f g

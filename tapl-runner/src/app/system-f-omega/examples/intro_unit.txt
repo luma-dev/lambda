@@ -1,0 +1,10 @@
+let fake_print = \x: Nat. unit;
+fake_print 0;
+fake_print 1;
+fake_print 2;
+unit;
+(
+  fake_print (succ 10);
+  fake_print (succ 20)
+);
+true

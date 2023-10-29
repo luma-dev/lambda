@@ -1,0 +1,6 @@
+def eq_sym = all a: Prop. all x: Prf a. all y: Prf a. all _: Prf eq a x y. eq a y x;
+def eq_sym_proof = (\proof: Prf eq_sym. proof) (
+   \a: Prop. \x: Prf a. \y: Prf a.
+      \H1: Prf eq a x y.
+        (H1 (\REPLACE: Prf a. eq a REPLACE x)) (intro_refl a x)
+);

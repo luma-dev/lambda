@@ -1,0 +1,36 @@
+def nat = (
+  all a: Prop.
+    // constructors
+    // - zero
+    all z: Prf a.
+    // - succ
+    all s: Prf a -> Prf a.
+    a
+);
+type Nat = Prf nat;
+def O = (
+  // value of Nat
+  \a: Prop. \z: Prf a. \s: Prf a -> Prf a. z
+);
+def S = (
+  // argument
+  \n: Nat.
+  // value of Nat
+  \a: Prop. \z: Prf a. \s: Prf a -> Prf a. s (n a z s)
+);
+def add = (
+  // arguments
+  \m: Nat. \n: Nat.
+  \a: Prop. \z: Prf a. \s: Prf a -> Prf a.
+    // Little difficult, but you can read as follows:
+    // s(m') + n = s(m' + n)
+    // do induction on m
+    m a (
+      // if m = 0
+      n a z s
+    ) (
+      // if m = S(m'), then S(itself with m is replaced with m')
+      s
+    )
+    // Or you can understand as usual addition implementation of Church Numerals: \z. \s. m (n z s) s
+);

@@ -1,0 +1,2 @@
+type I = \X:: *. X;
+\x: I[Nat] -> I[I[Nat]]. x 0

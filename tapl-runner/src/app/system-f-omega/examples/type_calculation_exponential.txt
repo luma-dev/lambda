@@ -1,0 +1,21 @@
+// Identity function in type world
+type I = \X:: *. X;
+// Church numeral 1 in type world
+type N_1 = \F:: * => *. \X:: *. F[X];
+// N |-> N*2 for type world church numeral
+type MUL_2 = \N:: (* => *) => * => *. \F:: * => *. \X:: *. N[F][N[F][X]];
+// In comparison, this is impossible to define in System F omega
+// type POWER_2 = \N:: (* => *) => * => *. \F:: * => *. \X:: *. N[N[F]][X];
+type MUL_1_I = MUL_2[N_1][I];
+// order of 2^5 steps
+type N_2_5 = (
+  MUL_2[MUL_2[MUL_2[MUL_2[MUL_2[N_1]]]]][I][Unit]
+);
+// order of 2^10 steps
+type N_2_10 = (
+  MUL_2[MUL_2[MUL_2[MUL_2[MUL_2[
+  MUL_2[MUL_2[MUL_2[MUL_2[MUL_2[N_1]]]]]]]]]][I][Unit]
+);
+\x: N_2_5. 0
+// Try at your own risk (it takes around 9000 steps)
+// \x: N_2_10. 0

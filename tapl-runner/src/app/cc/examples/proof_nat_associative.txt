@@ -1,0 +1,22 @@
+// associative: a + (b + c) = (a + b) + c
+def nat_add_associative = all a: Nat. all b: Nat. all c: Nat. eq nat (add a (add b c)) (add (add a b) c);
+def nat_add_associative_proof = (\proof: Prf nat_add_associative. proof) (
+  // induction on a
+  nat_ind (\a: Nat. all b: Nat. all c: Nat. eq nat (add a (add b c)) (add (add a b) c))
+  (
+    // if a = 0
+    // goal: 0 + (b + c) = (0 + b) + c -->* b + c = b + c
+    \b: Nat. \c: Nat.
+    intro_refl nat (add b c)
+  ) (
+    // if a = S(k)
+    // given:
+    // H1: k + (b + c) = (k + b) + c
+    // goal: S(k) + (b + c) = (S(k) + b) + c -->* S(k + (b + c)) = S((k + b) + c)
+    \k: Nat. \H1: Prf (all b: Nat. all c: Nat. eq nat (add k (add b c)) (add (add k b) c)).
+      \b: Nat. \c: Nat.
+      (H1 b c)
+      (\REPLACE: Nat. eq nat (add (S k) (add b c)) (S REPLACE))
+      (intro_refl nat (S (add k (add b c))))
+  )
+);

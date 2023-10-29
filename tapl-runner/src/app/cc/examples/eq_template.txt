@@ -1,0 +1,3 @@
+// Leibniz equality
+def eq = \a: Prop. \x: Prf a. \y: Prf a. all p: Prf a -> Prop. all h: Prf (p x). p y;
+def intro_refl = \a: Prop. \x: Prf a. \p: Prf a -> Prop. \h: Prf (p x). h;

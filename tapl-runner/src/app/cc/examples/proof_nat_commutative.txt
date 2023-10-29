@@ -1,0 +1,37 @@
+// commutative: n + m = m + n
+def nat_add_commutative = all n: Nat. all m: Nat. eq nat (add n m) (add m n);
+def nat_add_commutative_proof = (\proof: Prf nat_add_commutative. proof) (
+  // induction on n
+  nat_ind (\n: Nat. all m: Nat. eq nat (add n m) (add m n)) (
+    // if n = 0
+    // goal: 0 + m = m + 0 -->* m = m + 0
+    \m: Nat. nat_add_n_0_eq_n_proof m
+  ) (
+    // if n = S n'
+    // goal: S(n') + m = m + S(n') -->* S(n' + m) = m + S(n')
+    // given:
+    // H1: n' + m = m + n'
+    // so goal can be rewritten as S(m + n') = m + S(n')
+    \n_: Nat. \H1: Prf (all m: Nat. eq nat (add n_ m) (add m n_)).
+      \m: Nat.
+      (eq_sym_proof nat (add n_ m) (add m n_) (H1 m))
+      (\REPLACE: Nat. eq nat (S REPLACE) (add m (S n_)))
+      (
+        nat_ind (\m: Nat. eq nat (S (add m n_)) (add m (S n_))) (
+          // if m = 0
+          // goal: S(0 + n') = 0 + S(n') -->* S(n') = S(n')
+          intro_refl nat (S n_)
+        ) (
+          // if m = S(m')
+          // given:
+          // H2: S(m' + n') = m' + S(n')
+          // goal: S(S(m') + n') = S(m') + S(n') -->* S(S(m' + n')) = S(m' + S(n'))
+          // rewrite with H2: S(S(m' + n')) = S(S(m' + n'))
+          \m_: Nat. \H2: Prf (eq nat (S (add m_ n_)) (add m_ (S n_))).
+            H2
+            (\REPLACE: Nat. eq nat (S(S(add m_ n_))) (S(REPLACE)))
+            (intro_refl nat (S(S(add m_ n_))))
+        ) m
+      )
+  )
+);

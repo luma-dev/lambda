@@ -1,0 +1,45 @@
+// Treat Unit type as True
+type True = Unit;
+
+// type Not = \P:: *. P -> False;  // Planned
+// type And = \P:: *. \Q:: *. Pair[P][Q];  // Planned
+// type Or = \P:: *. \Q:: *. Either[P][Q];  // Planned
+
+// [[Provable examples in System F]]
+type TRUE_THEN_TRUE = True -> True;
+def true_then_true = (\x: True. x);
+
+type P_THEN_P = forall P:: *. (P -> P);
+def p_then_p = \P:: *. (\x: P. x);
+
+type P_Q_THEN_P = forall P:: *. forall Q:: *. (P -> Q -> P);
+def p_q_then_p = \P:: *. \Q:: *. (\x: P. \_: Q. x);
+
+type Q_P_THEN_P = forall P:: *. forall Q:: *. (Q -> P -> P);
+def q_p_then_p = \P:: *. \Q:: *. (\_: Q. \x: P. x);
+
+// [[Potentially provable examples in System F, but not in this system]]
+// type P_Q_THEN_P_AND_Q = forall P:: *. forall Q:: *. (P -> Q -> And[P][Q]);
+// type p_q_then_p_and_q = \ P:: *. \ Q:: *. (\x: P. \y: Q. Pair[P][Q]::intro x y);
+
+// type P_THEN_P_OR_Q = forall P:: *. forall Q:: *. (P -> OR[P][Q]);
+// type p_then_p_or_q = \ P:: *. \ Q:: *. (\x: P. intro_left[P][Q] x);
+
+// type P_THEN_P_OR_Q = forall P:: *. forall Q:: *. (P -> OR[P][Q]);
+// type p_then_p_or_q = \ P:: *. \ Q:: *. (\x: P. intro_left[P][Q] x);
+
+// type P_AND_Q_THEN_P = forall P:: *. forall Q:: *. (And[P][Q] -> P);
+// type p_and_q_then_p = \ P:: *. \ Q:: *. (\x: And[P][Q]. match x { intro x y => x });
+
+// type CONTRADICTION_THEN_ANY = forall P:: *. (False -> P);
+// type contradiction_then_any = \P:: *. (\x: False. match x {});
+
+// [[Unprovable examples in System F]]
+// type EXCLUDED_MIDDLE = forall P:: *. Or[P][Not[P]];
+type PEIRCE = forall P:: *. forall Q:: *. (((P -> Q) -> P) -> P);
+
+// [[Check]]
+(\x: TRUE_THEN_TRUE. unit) true_then_true;
+(\x: P_Q_THEN_P. unit) p_q_then_p;
+(\x: Q_P_THEN_P. unit) q_p_then_p;
+unit

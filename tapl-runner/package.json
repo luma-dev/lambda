@@ -1,0 +1,55 @@
+{
+  "name": "tapl-runner",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --no-lint",
+    "start": "next start",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx . && prettier --list-different .",
+    "lint-fix": "eslint --ext .js,.jsx,.ts,.tsx . --fix && prettier --write .",
+    "check-tsc": "tsc --noEmit",
+    "check-tsc-watch": "tsc --noEmit --watch"
+  },
+  "dependencies": {
+    "@datastructures-js/queue": "^4.2.3",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@monaco-editor/react": "^4.6.0",
+    "@mui/material": "^5.14.15",
+    "@qnighy/dedent": "^0.1.1",
+    "@tanstack/react-query": "^5.0.5",
+    "assert": "^2.1.0",
+    "eslint": "8.52.0",
+    "eslint-config-next": "13.5.6",
+    "@lumax/tapl": "file:../tapl-systems/pkg",
+    "katex": "^0.16.9",
+    "lazy-val": "^1.0.5",
+    "monaco-vim": "^0.4.0",
+    "next": "13.5.6",
+    "prettier": "^3.0.3",
+    "prettier-plugin-organize-imports": "^3.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-use": "^17.4.0",
+    "ts-pattern": "^5.0.5",
+    "typescript": "5.2.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^8.52.0",
+    "@types/eslint__js": "^8.42.2",
+    "@types/katex": "^0.16.5",
+    "@types/node": "20.8.8",
+    "@types/react": "^18.2.32",
+    "@types/react-dom": "^18.2.14",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  "overrides": {
+    "monaco-editor": "0.44.0"
+  }
+}

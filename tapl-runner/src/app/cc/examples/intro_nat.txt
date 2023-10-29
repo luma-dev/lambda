@@ -1,0 +1,6 @@
+def n_add_1_2 = add (S O) (S (S O));
+
+// Values of (Prf nat) behaves the same as Church Numerals
+// It is reduced to term like (\f. \x f (f (f x)))
+// which applies f 3 times to x
+n_add_1_2

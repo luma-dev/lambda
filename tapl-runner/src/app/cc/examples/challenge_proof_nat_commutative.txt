@@ -1,0 +1,6 @@
+// commutative: n + m = m + n
+def nat_add_commutative = all n: Nat. all m: Nat. eq nat (add n m) (add m n);
+def nat_add_commutative_proof = (\proof: Prf nat_add_commutative. proof) (
+  // start proof of n + m = m + n
+  // [Let's prove!]
+);

@@ -1,0 +1,18 @@
+def nat_add_n_0_eq_n = all n: Nat. eq nat (add O n) n;
+def nat_add_n_0_eq_n_proof = (\proof: Prf nat_add_n_0_eq_n. proof) (
+  // Proof:
+  // induction on n
+  nat_ind (\n: Nat. eq nat (add O n) n) (
+    // if n = 0
+    intro_refl nat O
+  ) (
+    // if n = S(k), where k in Nat, and proof for k is given (0 + k = k)
+    \k: Nat. \H1: Prf (eq nat (add O k) k).
+    // replace left hand side with H1: S(0 + k) = S(k)
+    (eq_sym_proof nat (add O k) k H1)
+    (\REPLACE: Nat. eq nat (S REPLACE) (S k))
+    // introduce equality reflexivity: S(k) = S(k)
+    (intro_refl nat (S k))
+    // Q.E.D.
+  )
+);

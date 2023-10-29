@@ -1,0 +1,44 @@
+use super::ast::{Bind, Def, Identifier, Source, NamedTerm};
+
+grammar;
+
+pub Source: Source = <defs:Def*> <term:Term> => Source::new(defs, term);
+
+pub Def: Def = "def" <name:Identifier> "=" <term:Term> "." => Def::new(name, term);
+
+pub Term: NamedTerm = TermTop;
+
+TermTop: NamedTerm = {
+  <TermNonLambda> <TermNonApply> => NamedTerm::new_apply(<>),
+  <TermNonApply>,
+};
+TermNonLambda: NamedTerm = {
+  <TermNonLambda> <TermNonLambdaNonApply> => NamedTerm::new_apply(<>),
+  <TermVar>,
+  <TermParenthesized>,
+};
+TermNonLambdaNonApply: NamedTerm = {
+  <TermVar>,
+  <TermParenthesized>,
+};
+TermNonApply: NamedTerm = {
+  <TermVar>,
+  <TermLambda>,
+  <TermParenthesized>,
+};
+TermLambda: NamedTerm = {
+  "\\" <binds:Bind+> "." <body:TermTop> => NamedTerm::new_abs(binds, body),
+};
+TermVar: NamedTerm = {
+  <Identifier> => NamedTerm::new_var(<>),
+};
+TermParenthesized: NamedTerm = {
+  "(" <TermTop> ")",
+};
+
+Bind: Bind = {
+  "_" => Bind::new_wildcard(),
+  <Identifier> => Bind::new_identifier(<>),
+};
+
+Identifier: Identifier = r"\w[\w\d_]*" => Identifier::new(<>.to_string());

@@ -1,0 +1,8 @@
+let add = fix (\self: Nat -> Nat -> Nat. \x: Nat. \y: Nat. (
+  if is_zero(y) {
+    x
+  } else {
+    self(succ(x))(pred(y))
+  }
+));
+add 2 3

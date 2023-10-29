@@ -1,0 +1,11 @@
+let le_5 = \n_0: Nat. (
+  let n_1 = pred n_0;
+  let n_2 = pred n_1;
+  let n_3 = pred n_2;
+  let n_4 = pred n_3;
+  let n_5 = pred n_4;
+  is_zero n_5
+);
+
+// Try with your favorite numbers!
+le_5 10

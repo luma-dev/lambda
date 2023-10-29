@@ -1,0 +1,17 @@
+use crate::untyped_arith::ast::Term;
+
+grammar;
+
+pub Term: Term = {
+  "true" => Term::True,
+  "false" => Term::False,
+  "if" <t1:Term> "then" <t2:Term> "else" <t3:Term> => Term::If{
+    cond: t1.into(),
+    then_clause: t2.into(),
+    else_clause: t3.into(),
+  },
+  "0" => Term::Zero,
+  "succ" <Term> => Term::Succ(<>.into()),
+  "pred" <Term> => Term::Pred(<>.into()),
+  "iszero" <Term> => Term::Iszero(<>.into()),
+};

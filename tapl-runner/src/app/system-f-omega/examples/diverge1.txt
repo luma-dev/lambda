@@ -1,0 +1,6 @@
+// WARN: NON TERMINATING EXAMPLE
+def diverge = \X:: *. fix (\x: X. x);
+type I = \X:: *. X;
+diverge[Unit];
+diverge[I[Unit]];
+fix diverge[I[Nat] -> Nat]

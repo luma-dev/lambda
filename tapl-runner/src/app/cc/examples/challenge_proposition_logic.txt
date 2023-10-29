@@ -1,0 +1,97 @@
+// def pair = [Let's define!]
+// def pair_intro = [Let's define!]
+
+def either = (
+  // generics
+  \Left: Prop. \Right: Prop.
+  // structure
+  all a: Prop.
+    // constructors
+    all left: Prf Left -> Prf a.
+    all right: Prf Right -> Prf a.
+    a
+);
+def left = (
+  // generics
+  \Left: Prop. \Right: Prop.
+  // arguments
+  \v: Prf Left.
+  // value of (Prf either Left Right)
+  \a: Prop. \left: Prf Left -> Prf a. \right: Prf Right -> Prf a.
+    left v
+);
+def right = (
+  // generics
+  \Left: Prop. \Right: Prop.
+  // arguments
+  \v: Prf Right.
+  // value of (Prf either Left Right)
+  \a: Prop. \left: Prf Left -> Prf a. \right: Prf Right -> Prf a.
+    right v
+);
+
+// ⊤
+def true = (
+  // structure
+  all a: Prop.
+    // constructors
+    all intro: Prf a.
+    a
+);
+def true_intro = \a: Prop. \intro: Prf a. intro;
+// ⊥
+// Wow! it's interesting that in CC, natural false definition is the function that takes any type and return the value of that.
+def false = (
+  // structure (no constructor)
+  all a: Prop.
+    a
+);
+
+// >> Logic operators
+// P ∧ Q
+def and = \P: Prop. \Q: Prop. pair P Q;
+// P ∨ Q
+def or = \P: Prop. \Q: Prop. either P Q;
+// P → Q
+def implies = \P: Prop. \Q: Prop. all p: Prf P. Q;
+// ¬P
+def not = \P: Prop. implies P false;
+// P ↔ Q
+def iff = \P: Prop. \Q: Prop. and (implies P Q) (implies Q P);
+
+// ========= end of preparation ========
+
+// >> Provable theories (Intuitionistic Logic)
+// P → ¬P → Q
+def not2 = all P: Prop. all Q: Prop. implies P (implies (not P) Q);
+def not2_proof = (\proof: Prf not2. proof) (
+  // [Let's prove!]
+);
+// ⊥ → P
+def false2 = all P: Prop. implies false P;
+def false2_proof = (\proof: Prf false2. proof) (
+  // [Let's prove!]
+);
+// P → ¬¬P
+def double_negation_intro = all P: Prop. implies P (not (not P));
+def double_negation_intro_proof = (\proof: Prf double_negation_intro. proof) (
+  // [Let's prove!]
+);
+
+// >> Classic Logic
+// P ∨ ¬P
+axiom classic_excluded_middle: pi P: Prop. or P (not P);
+
+// ¬¬P → P
+def double_negation_elimination = all P: Prop. implies (not (not P)) P;
+def double_negation_elimination_proof = (\proof: Prf double_negation_elimination. proof) (
+  // [Let's prove!]
+);
+// ((P → Q) → P) → P
+def classic_peirce = all P: Prop. all Q: Prop. implies (implies (implies P Q) P) P;
+def classic_peirce_proof = (\proof: Prf classic_peirce. proof) (
+  // [Let's prove in classic logic!]
+);
+
+// End of file
+(x: Prop. x)

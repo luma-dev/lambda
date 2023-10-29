@@ -1,0 +1,3 @@
+let composite = \X:: *. \Y:: *. \Z:: *. \f: X -> Y. \g: Y -> Z. \x: X. g(f(x));
+let double = \X:: *. \f: X -> X. \x: X. composite[X][X][X] f f x;
+double[Nat] (composite[Nat][Nat][Nat] succ succ) 1

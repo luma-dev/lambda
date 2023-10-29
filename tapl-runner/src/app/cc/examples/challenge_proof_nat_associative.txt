@@ -1,0 +1,6 @@
+// associative: a + (b + c) = (a + b) + c
+def nat_add_associative = all a: Nat. all b: Nat. all c: Nat. eq nat (add a (add b c)) (add (add a b) c);
+def nat_add_associative_proof = (\proof: Prf nat_add_associative. proof) (
+  // start proof of a + (b + c) = (a + b) + c
+  // [Let's prove!]
+);

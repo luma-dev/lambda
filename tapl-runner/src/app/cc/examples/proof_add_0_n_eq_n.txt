@@ -1,0 +1,9 @@
+def nat_add_0_n_eq_n = all n: Nat. eq nat (add O n) n;
+def nat_add_0_n_eq_n_proof = (\proof: Prf nat_add_0_n_eq_n. proof) (
+  // Proof:
+  // ∀ n ∈ Nat
+  \n: Nat.
+  // reflexivity of equality
+  intro_refl nat n
+  // Q.E.D.
+);

@@ -1,0 +1,8 @@
+// 1 + 1 = 2
+def nat_add_1_1_eq_2 = eq nat (add (S O) (S O)) (S (S O));
+def nat_add_1_1_eq_2_proof = (\proof: Prf nat_add_1_1_eq_2. proof) (
+  // Proof:
+  // reflexivity of equality
+  intro_refl nat (S (S O))
+  // Q.E.D.
+);

@@ -1,0 +1,12 @@
+// Temporal way to define natural induction just for now.
+axiom nat_ind: (
+  // Read as following (read "pi" as "for all"):
+  // For any predicate P for natural
+  pi P: Nat -> Prop.
+    // If proof for P(0)
+    pi p0: Prf (P O).
+    // and inductive proof; for all k in nat, P(k) is proven, then P(k+1) is proven
+    pi f: pi k: Nat. Prf (P k) -> Prf (P (S k)).
+  // then P satisfies for all natural numbers
+  pi n: Nat. Prf (P n)
+);
